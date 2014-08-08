@@ -5,9 +5,3 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-
-#Create some questions
-5.times do |question|
-		Question.create(title: Faker::Lorem.sentence, body: Faker::Lorem.sentence)
-end

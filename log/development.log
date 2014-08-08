@@ -878,3 +878,19 @@ Processing by QuestionsController#show as HTML
   [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 2]]
   Rendered questions/show.html.erb within layouts/application (0.1ms)
 Completed 200 OK in 9ms (Views: 7.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/questions/3" for 127.0.0.1 at 2014-08-08 16:20:32 -0400
+Processing by QuestionsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered questions/show.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 6ms (Views: 4.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/questions/2" for 127.0.0.1 at 2014-08-08 16:20:41 -0400
+Processing by QuestionsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered questions/show.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 8ms (Views: 6.0ms | ActiveRecord: 0.1ms)
