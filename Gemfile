@@ -47,3 +47,6 @@ gem 'capybara'
 # Use Devise
 gem 'devise', '~> 3.2.4'
 
+# Use Faker
+gem 'faker'
+
