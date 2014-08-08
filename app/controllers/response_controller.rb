@@ -1,4 +1,4 @@
-class ResponsesController < ActionController::Base
+class ResponseController < ActionController::Base
 
   def new
     @response = Response.new
