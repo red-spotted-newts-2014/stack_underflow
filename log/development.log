@@ -1,0 +1,867 @@
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateAnswers (20140808150336)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "answers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "body" text, "user_id" integer, "question_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140808150336"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+Migrating to CreateQuestions (20140808150733)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "questions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "body" text, "user_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_questions_on_user_id" ON "questions" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140808150733"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateResponses (20140808152201)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "responses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "responsable_id" integer, "responsable_type" varchar(255), "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_responses_on_responsable_id" ON "responses" ("responsable_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140808152201"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to DeviseCreateUsers (20140808152358)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.7ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140808152358"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateVotes (20140808152942)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "votes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "up?" boolean DEFAULT 't', "votable_id" integer, "votable_type" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140808152942"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateTags (20140808181012)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140808181012"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateQuestionTags (20140808183228)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "question_tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "question_id" integer, "tag_id" integer) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_question_tags_on_question_id" ON "question_tags" ("question_id")
+  [1m[36m (0.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_question_tags_on_question_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_question_tags_on_question_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_question_tags_on_tag_id" ON "question_tags" ("tag_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140808183228"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_question_tags_on_tag_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_question_tags_on_tag_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_question_tags_on_question_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_question_tags_on_question_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_questions_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_questions_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_responses_on_responsable_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_responses_on_responsable_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test@test.test' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Aut cumque sed sunt dignissimos sequi.' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Nostrum et reiciendis quis eaque omnis dolorum."], ["title", "Aut cumque sed sunt dignissimos sequi."]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Quo sapiente et quod at mollitia eum debitis.' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Officiis modi ratione eum deserunt illo."], ["title", "Quo sapiente et quod at mollitia eum debitis."]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Fugiat tempore est sed dolor.' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Eveniet repellendus quos odio."], ["title", "Fugiat tempore est sed dolor."]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Cumque dignissimos qui non est in ut accusamus est.' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Sit at aperiam atque."], ["title", "Cumque dignissimos qui non est in ut accusamus est."]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Reprehenderit quasi illum qui voluptatem ipsam quo.' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Est quibusdam cumque qui voluptas non animi doloribus nihil."], ["title", "Reprehenderit quasi illum qui voluptatem ipsam quo."]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "Rerum expedita ducimus fugiat vitae non quia."], ["created_at", "2014-08-08 21:49:41.843782"], ["updated_at", "2014-08-08 21:49:41.843782"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "Vero aliquam odit tempore necessitatibus perferendis."], ["created_at", "2014-08-08 21:49:41.847381"], ["updated_at", "2014-08-08 21:49:41.847381"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "Doloremque ad blanditiis accusantium sit dolore officiis."], ["created_at", "2014-08-08 21:49:41.849155"], ["updated_at", "2014-08-08 21:49:41.849155"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "Harum quo blanditiis nihil ullam et voluptatibus."], ["created_at", "2014-08-08 21:49:41.850892"], ["updated_at", "2014-08-08 21:49:41.850892"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "Quis dignissimos assumenda inventore nostrum."], ["created_at", "2014-08-08 21:49:41.852631"], ["updated_at", "2014-08-08 21:49:41.852631"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "Id est odit aut voluptatem odio."], ["created_at", "2014-08-08 21:49:41.854424"], ["updated_at", "2014-08-08 21:49:41.854424"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "Voluptatem et optio consequatur excepturi pariatur porro."], ["created_at", "2014-08-08 21:49:41.856092"], ["updated_at", "2014-08-08 21:49:41.856092"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "Consectetur enim ut neque id sit."], ["created_at", "2014-08-08 21:49:41.857816"], ["updated_at", "2014-08-08 21:49:41.857816"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "Tenetur animi minima libero nulla cupiditate iste hic."], ["created_at", "2014-08-08 21:49:41.859572"], ["updated_at", "2014-08-08 21:49:41.859572"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "Mollitia aut temporibus deserunt est."], ["created_at", "2014-08-08 21:49:41.861043"], ["updated_at", "2014-08-08 21:49:41.861043"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT "questions".* FROM "questions"
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 8[0m  [["question_id", 1], ["updated_at", "2014-08-08 21:49:41.875280"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Ipsum voluptas eum est."], ["created_at", "2014-08-08 21:49:41.883825"], ["responsable_id", 1], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.883825"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 10  [["question_id", 1], ["updated_at", "2014-08-08 21:49:41.886330"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Aut et in dolorem quas quae repudiandae ex neque."], ["created_at", "2014-08-08 21:49:41.888828"], ["responsable_id", 1], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.888828"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 2[0m  [["question_id", 1], ["updated_at", "2014-08-08 21:49:41.891077"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Nam dolorem ab sed quidem deserunt."], ["created_at", "2014-08-08 21:49:41.893696"], ["responsable_id", 1], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.893696"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 1  [["question_id", 1], ["updated_at", "2014-08-08 21:49:41.895929"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Non vel est pariatur quas praesentium."], ["created_at", "2014-08-08 21:49:41.898317"], ["responsable_id", 1], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.898317"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Inventore dicta sequi ducimus dignissimos doloremque."], ["created_at", "2014-08-08 21:49:41.901768"], ["responsable_id", 1], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.901768"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 5[0m  [["question_id", 2], ["updated_at", "2014-08-08 21:49:41.904302"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Voluptas unde minus eos."], ["created_at", "2014-08-08 21:49:41.907125"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.907125"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 1  [["question_id", 2], ["updated_at", "2014-08-08 21:49:41.909320"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Non odio sunt in voluptas excepturi distinctio maxime."], ["created_at", "2014-08-08 21:49:41.911720"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.911720"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 9[0m  [["question_id", 2], ["updated_at", "2014-08-08 21:49:41.913873"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Aliquid et qui blanditiis minus vitae voluptatem rem maxime."], ["created_at", "2014-08-08 21:49:41.916242"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.916242"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 10  [["question_id", 2], ["updated_at", "2014-08-08 21:49:41.918527"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Eius velit unde molestiae distinctio."], ["created_at", "2014-08-08 21:49:41.921172"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.921172"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Et dolores ut expedita."], ["created_at", "2014-08-08 21:49:41.924445"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.924445"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 3[0m  [["question_id", 2], ["updated_at", "2014-08-08 21:49:41.926614"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Quam quis dolores nemo facere voluptatem nihil."], ["created_at", "2014-08-08 21:49:41.929058"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.929058"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 4  [["question_id", 2], ["updated_at", "2014-08-08 21:49:41.931389"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Necessitatibus dignissimos explicabo consequatur aut et delectus magni."], ["created_at", "2014-08-08 21:49:41.933824"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.933824"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Quia ab sed accusamus."], ["created_at", "2014-08-08 21:49:41.937399"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.937399"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Cum est eum praesentium delectus voluptatem aspernatur."], ["created_at", "2014-08-08 21:49:41.940748"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.940748"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 2[0m  [["question_id", 3], ["updated_at", "2014-08-08 21:49:41.943210"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Ab consequatur suscipit qui eos reiciendis dolorum."], ["created_at", "2014-08-08 21:49:41.946090"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.946090"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 3  [["question_id", 3], ["updated_at", "2014-08-08 21:49:41.949223"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Accusamus quia natus iure nemo itaque et."], ["created_at", "2014-08-08 21:49:41.952458"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.952458"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Perferendis nisi alias eveniet esse."], ["created_at", "2014-08-08 21:49:41.957452"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.957452"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 9[0m  [["question_id", 3], ["updated_at", "2014-08-08 21:49:41.959863"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Consequatur tempore earum molestiae sed sunt."], ["created_at", "2014-08-08 21:49:41.962491"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.962491"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 4  [["question_id", 3], ["updated_at", "2014-08-08 21:49:41.965326"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Quaerat consectetur quia distinctio corporis et."], ["created_at", "2014-08-08 21:49:41.968001"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.968001"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Amet consequatur maxime et omnis vero inventore cumque sunt."], ["created_at", "2014-08-08 21:49:41.971595"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.971595"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 10[0m  [["question_id", 3], ["updated_at", "2014-08-08 21:49:41.973839"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Doloribus ut in sequi rem."], ["created_at", "2014-08-08 21:49:41.976270"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.976270"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 4  [["question_id", 4], ["updated_at", "2014-08-08 21:49:41.979045"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Neque consequuntur qui nostrum quia aspernatur."], ["created_at", "2014-08-08 21:49:41.982131"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.982131"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 9[0m  [["question_id", 4], ["updated_at", "2014-08-08 21:49:41.984762"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Nam enim eveniet quae delectus."], ["created_at", "2014-08-08 21:49:41.987488"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.987488"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 8  [["question_id", 4], ["updated_at", "2014-08-08 21:49:41.989996"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Fugit facere ratione consequatur sit autem."], ["created_at", "2014-08-08 21:49:41.992812"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.992812"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Ex similique ea earum voluptatem assumenda."], ["created_at", "2014-08-08 21:49:41.997003"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:41.997003"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 7[0m  [["question_id", 4], ["updated_at", "2014-08-08 21:49:41.999919"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Itaque qui voluptate corrupti laudantium modi assumenda necessitatibus ut."], ["created_at", "2014-08-08 21:49:42.002890"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:42.002890"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 2  [["question_id", 4], ["updated_at", "2014-08-08 21:49:42.005212"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Sapiente quis iste voluptatem omnis sit fuga eligendi ut."], ["created_at", "2014-08-08 21:49:42.007742"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:42.007742"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 8[0m  [["question_id", 5], ["updated_at", "2014-08-08 21:49:42.010104"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Et at officiis eos id sunt aspernatur omnis tempore."], ["created_at", "2014-08-08 21:49:42.012868"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:42.012868"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 7  [["question_id", 5], ["updated_at", "2014-08-08 21:49:42.015478"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Iste beatae enim alias distinctio rem aut."], ["created_at", "2014-08-08 21:49:42.018564"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:42.018564"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 3[0m  [["question_id", 5], ["updated_at", "2014-08-08 21:49:42.021108"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Aut voluptas eligendi fugit odit maiores autem eos."], ["created_at", "2014-08-08 21:49:42.023628"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:42.023628"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 1  [["question_id", 5], ["updated_at", "2014-08-08 21:49:42.025740"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Quia illo praesentium fugiat occaecati perspiciatis excepturi voluptates."], ["created_at", "2014-08-08 21:49:42.028167"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:42.028167"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Molestias enim error illum in."], ["created_at", "2014-08-08 21:49:42.032303"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:42.032303"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 6[0m  [["question_id", 5], ["updated_at", "2014-08-08 21:49:42.034848"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Quod voluptas accusamus perspiciatis et rerum et nesciunt esse."], ["created_at", "2014-08-08 21:49:42.038099"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:42.038099"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 10  [["question_id", 5], ["updated_at", "2014-08-08 21:49:42.041015"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Est et voluptates et voluptatum placeat."], ["created_at", "2014-08-08 21:49:42.043672"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:42.043672"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.3ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Et eligendi ratione nulla dolores."], ["created_at", "2014-08-08 21:49:42.049734"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:42.049734"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Est delectus facere illum."], ["created_at", "2014-08-08 21:49:42.054137"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-08 21:49:42.054137"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Aperiam doloribus dolores beatae qui vitae occaecati."], ["created_at", "2014-08-08 21:49:42.058200"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.058200"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Iure et ut ea odio praesentium et maiores quod."], ["created_at", "2014-08-08 21:49:42.060638"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.060638"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Consequatur aspernatur in blanditiis libero earum quam."], ["created_at", "2014-08-08 21:49:42.062917"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.062917"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Dolore labore voluptates rem."], ["created_at", "2014-08-08 21:49:42.066241"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.066241"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Asperiores aspernatur maiores vero excepturi ut cupiditate."], ["created_at", "2014-08-08 21:49:42.069536"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.069536"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Minus mollitia modi ipsum et qui."], ["created_at", "2014-08-08 21:49:42.072962"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.072962"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Et sunt provident ducimus aliquam dolores ut consequatur."], ["created_at", "2014-08-08 21:49:42.076677"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.076677"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Veniam autem beatae ut."], ["created_at", "2014-08-08 21:49:42.079406"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.079406"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Rerum iure aliquam omnis."], ["created_at", "2014-08-08 21:49:42.082215"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.082215"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Doloremque numquam quo corrupti accusantium voluptatem facilis."], ["created_at", "2014-08-08 21:49:42.084867"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.084867"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Non soluta et quasi aspernatur id tempore."], ["created_at", "2014-08-08 21:49:42.087561"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.087561"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Et dignissimos voluptas unde et voluptate."], ["created_at", "2014-08-08 21:49:42.089919"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.089919"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Neque ad quis illum eligendi veniam."], ["created_at", "2014-08-08 21:49:42.092247"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.092247"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Unde quo est et delectus praesentium voluptates sed."], ["created_at", "2014-08-08 21:49:42.094614"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.094614"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Totam voluptatem cum dolor perferendis consequatur est."], ["created_at", "2014-08-08 21:49:42.097053"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.097053"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Voluptatem dolorem quia dolorum consectetur et."], ["created_at", "2014-08-08 21:49:42.099627"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.099627"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Repellendus harum distinctio quo quis et necessitatibus saepe."], ["created_at", "2014-08-08 21:49:42.101975"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.101975"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "A odit similique autem qui porro et."], ["created_at", "2014-08-08 21:49:42.104302"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.104302"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Deleniti officiis reiciendis maiores."], ["created_at", "2014-08-08 21:49:42.106900"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.106900"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Blanditiis ad neque totam."], ["created_at", "2014-08-08 21:49:42.109281"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.109281"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Praesentium suscipit sit provident voluptatum."], ["created_at", "2014-08-08 21:49:42.111826"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.111826"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Velit earum est consequuntur ea non excepturi."], ["created_at", "2014-08-08 21:49:42.114232"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.114232"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Animi repellat cupiditate in harum eius velit."], ["created_at", "2014-08-08 21:49:42.116773"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.116773"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Laborum at quos voluptatem veniam."], ["created_at", "2014-08-08 21:49:42.119046"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.119046"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Voluptas et fugiat neque deleniti consequatur nulla soluta dolores."], ["created_at", "2014-08-08 21:49:42.121409"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.121409"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Quisquam harum beatae tempora sequi praesentium sint."], ["created_at", "2014-08-08 21:49:42.123948"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.123948"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Doloremque deserunt expedita veniam repudiandae ullam laboriosam."], ["created_at", "2014-08-08 21:49:42.126258"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.126258"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Porro sunt iure aut error nobis."], ["created_at", "2014-08-08 21:49:42.128597"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.128597"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Iste dolorum consectetur non sit."], ["created_at", "2014-08-08 21:49:42.131134"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.131134"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Animi esse iste laudantium voluptates."], ["created_at", "2014-08-08 21:49:42.133499"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.133499"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Ea similique aut ullam est ipsum."], ["created_at", "2014-08-08 21:49:42.136225"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.136225"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Nihil quas ab nulla suscipit."], ["created_at", "2014-08-08 21:49:42.138715"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.138715"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Doloribus similique et alias."], ["created_at", "2014-08-08 21:49:42.140958"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.140958"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Ut sint vel sapiente."], ["created_at", "2014-08-08 21:49:42.143316"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.143316"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Occaecati tempora fuga accusantium."], ["created_at", "2014-08-08 21:49:42.145639"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.145639"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Ea cum sapiente adipisci repudiandae quas distinctio."], ["created_at", "2014-08-08 21:49:42.148381"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.148381"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Impedit esse mollitia maxime nobis voluptatem et."], ["created_at", "2014-08-08 21:49:42.150912"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.150912"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Recusandae et blanditiis autem."], ["created_at", "2014-08-08 21:49:42.153989"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.153989"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Consequuntur est incidunt id enim dolor nihil et repudiandae."], ["created_at", "2014-08-08 21:49:42.156772"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.156772"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Soluta vero quas maxime fuga et."], ["created_at", "2014-08-08 21:49:42.159328"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.159328"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Voluptatem recusandae quidem illo."], ["created_at", "2014-08-08 21:49:42.161998"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.161998"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Et reprehenderit occaecati qui nobis qui ad."], ["created_at", "2014-08-08 21:49:42.164451"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.164451"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Omnis cupiditate odio sit provident quibusdam distinctio voluptates dolores."], ["created_at", "2014-08-08 21:49:42.167046"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.167046"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Beatae quia dolores deleniti et ipsa."], ["created_at", "2014-08-08 21:49:42.169688"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.169688"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Ipsa rerum ipsum eum occaecati nulla esse at aut."], ["created_at", "2014-08-08 21:49:42.172100"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.172100"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Fugit aut aut voluptas."], ["created_at", "2014-08-08 21:49:42.174639"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.174639"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Accusantium rerum voluptatem repellendus sunt dolorum."], ["created_at", "2014-08-08 21:49:42.177007"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.177007"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Et ut doloribus suscipit maiores voluptatem similique consequatur."], ["created_at", "2014-08-08 21:49:42.179324"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.179324"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Repudiandae ex corporis in et assumenda laudantium sed possimus."], ["created_at", "2014-08-08 21:49:42.181841"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.181841"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Reprehenderit atque architecto delectus eum."], ["created_at", "2014-08-08 21:49:42.184317"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-08 21:49:42.184317"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 127.0.0.1 at 2014-08-08 17:49:48 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by QuestionsController#index as HTML
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT "questions".* FROM "questions"
+  Rendered questions/_list_questions.erb (4.3ms)
+  Rendered questions/index.html.erb within layouts/application (7.6ms)
+  Rendered _signup_logic.html.erb (5.0ms)
+  Rendered _navbar.html.erb (6.1ms)
+Completed 200 OK in 117ms (Views: 94.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/questions/2" for 127.0.0.1 at 2014-08-08 17:49:52 -0400
+Processing by QuestionsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mResponse Load (0.7ms)[0m  SELECT "responses".* FROM "responses"  WHERE "responses"."responsable_id" = ? AND "responses"."responsable_type" = ?  [["responsable_id", 2], ["responsable_type", "Question"]]
+  Rendered questions/_show_question_and_responses.html.erb (37.7ms)
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 2]]
+  [1m[35mResponse Load (0.1ms)[0m  SELECT "responses".* FROM "responses"  WHERE "responses"."responsable_id" = ? AND "responses"."responsable_type" = ?  [["responsable_id", 5], ["responsable_type", "Answer"]]
+  Rendered questions/_list_answers_and_responses.html.erb (11.5ms)
+  Rendered questions/show.html.erb within layouts/application (53.8ms)
+  Rendered _signup_logic.html.erb (0.4ms)
+  Rendered _navbar.html.erb (1.2ms)
+Completed 200 OK in 69ms (Views: 64.5ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-08-08 17:49:53 -0400
+Processing by QuestionsController#index as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_list_questions.erb (2.2ms)
+  Rendered questions/index.html.erb within layouts/application (3.7ms)
+  Rendered _signup_logic.html.erb (0.6ms)
+  Rendered _navbar.html.erb (1.9ms)
+Completed 200 OK in 22ms (Views: 21.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/question/unanswered" for 127.0.0.1 at 2014-08-08 17:49:54 -0400
+Processing by QuestionsController#unanswered as HTML
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT "questions".* FROM "questions"
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35mAnswer Load (0.6ms)[0m  SELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?  [["question_id", 2]]
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 3]]
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?  [["question_id", 4]]
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 5]]
+  Rendered questions/_list_questions.erb (0.7ms)
+  Rendered questions/unanswered.html.erb within layouts/application (2.7ms)
+  Rendered _signup_logic.html.erb (0.8ms)
+  Rendered _navbar.html.erb (2.7ms)
+Completed 200 OK in 29ms (Views: 19.6ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-08-08 17:50:07 -0400
+Processing by QuestionsController#index as HTML
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT "questions".* FROM "questions"
+  Rendered questions/_list_questions.erb (3.1ms)
+  Rendered questions/index.html.erb within layouts/application (4.1ms)
+  Rendered _signup_logic.html.erb (0.7ms)
+  Rendered _navbar.html.erb (3.8ms)
+Completed 200 OK in 25ms (Views: 24.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-08-08 17:50:20 -0400
+Processing by QuestionsController#index as HTML
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_list_questions.erb (1.0ms)
+  Rendered questions/index.html.erb within layouts/application (1.6ms)
+  Rendered _signup_logic.html.erb (0.3ms)
+  Rendered _navbar.html.erb (1.0ms)
+Completed 200 OK in 12ms (Views: 11.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/question/unanswered" for 127.0.0.1 at 2014-08-08 17:50:21 -0400
+Processing by QuestionsController#unanswered as HTML
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT "questions".* FROM "questions"
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?  [["question_id", 2]]
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 3]]
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?  [["question_id", 4]]
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 5]]
+  Rendered questions/_list_questions.erb (0.4ms)
+  Rendered questions/unanswered.html.erb within layouts/application (1.3ms)
+  Rendered _signup_logic.html.erb (0.6ms)
+  Rendered _navbar.html.erb (1.9ms)
+Completed 200 OK in 27ms (Views: 18.9ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-08-08 17:50:23 -0400
+Processing by QuestionsController#index as HTML
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT "questions".* FROM "questions"
+  Rendered questions/_list_questions.erb (1.8ms)
+  Rendered questions/index.html.erb within layouts/application (2.8ms)
+  Rendered _signup_logic.html.erb (0.3ms)
+  Rendered _navbar.html.erb (1.0ms)
+Completed 200 OK in 54ms (Views: 53.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/question/unanswered" for 127.0.0.1 at 2014-08-08 17:50:25 -0400
+Processing by QuestionsController#unanswered as HTML
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?  [["question_id", 1]]
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 2]]
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?  [["question_id", 3]]
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 4]]
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?  [["question_id", 5]]
+  Rendered questions/_list_questions.erb (0.6ms)
+  Rendered questions/unanswered.html.erb within layouts/application (1.7ms)
+  Rendered _signup_logic.html.erb (0.5ms)
+  Rendered _navbar.html.erb (1.6ms)
+Completed 200 OK in 31ms (Views: 21.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-08-08 17:50:26 -0400
+Processing by QuestionsController#index as HTML
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_list_questions.erb (3.0ms)
+  Rendered questions/index.html.erb within layouts/application (4.7ms)
+  Rendered _signup_logic.html.erb (0.7ms)
+  Rendered _navbar.html.erb (2.1ms)
+Completed 200 OK in 23ms (Views: 22.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/question/unanswered" for 127.0.0.1 at 2014-08-08 17:50:27 -0400
+Processing by QuestionsController#unanswered as HTML
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT "questions".* FROM "questions"
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?  [["question_id", 2]]
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 3]]
+  [1m[35mAnswer Load (0.5ms)[0m  SELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?  [["question_id", 4]]
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"  WHERE "answers"."question_id" = ?[0m  [["question_id", 5]]
+  Rendered questions/_list_questions.erb (0.5ms)
+  Rendered questions/unanswered.html.erb within layouts/application (1.4ms)
+  Rendered _signup_logic.html.erb (0.7ms)
+  Rendered _navbar.html.erb (2.4ms)
+Completed 200 OK in 31ms (Views: 21.9ms | ActiveRecord: 1.3ms)

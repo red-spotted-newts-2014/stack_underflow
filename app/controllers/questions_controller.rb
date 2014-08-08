@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
 	end
 
 	def unanswered
-		@questions = Question.all
+		@questions = Question.unanswered
 	end
 
 	def new
