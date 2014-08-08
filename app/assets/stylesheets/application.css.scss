@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.panel {
+  width:35em;
+  margin: auto;
+}
+
+input#user_remember_me {
+  margin-left:0;
+}
