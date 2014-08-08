@@ -1,4 +1,4 @@
-class AnswersController < ApplicationController
+class AnswerController < ApplicationController
   def create
     Answer.create(post_params)
   end

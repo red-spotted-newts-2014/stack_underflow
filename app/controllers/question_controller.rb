@@ -1,4 +1,4 @@
-class QuestionsController < ApplicationController
+class QuestionController < ApplicationController
 	def index
 		@questions = Question.all
 	end
@@ -48,5 +48,5 @@ class QuestionsController < ApplicationController
 	  def question_params
 	    params.require(:question).permit(:title, :body)
 	  end
-	end
+
 end

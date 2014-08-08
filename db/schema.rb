@@ -11,10 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 0) do
-=======
-ActiveRecord::Schema.define(version: 20140808152358) do
+ActiveRecord::Schema.define(version: 20140808183228) do
+
+  create_table "answers", force: true do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "question_tags", force: true do |t|
+    t.integer "question_id"
+    t.integer "tag_id"
+  end
+
+  add_index "question_tags", ["question_id"], name: "index_question_tags_on_question_id"
+  add_index "question_tags", ["tag_id"], name: "index_question_tags_on_tag_id"
+
+  create_table "questions", force: true do |t|
+    t.string  "title"
+    t.text    "body"
+    t.integer "user_id"
+  end
+
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id"
+
+  create_table "responses", force: true do |t|
+    t.integer  "responsable_id"
+    t.string   "responsable_type"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "responses", ["responsable_id"], name: "index_responses_on_responsable_id"
+
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -33,6 +68,13 @@ ActiveRecord::Schema.define(version: 20140808152358) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
->>>>>>> caac0b386560ef4c3d3d4809910dde4b3ede96dd
+
+  create_table "votes", force: true do |t|
+    t.boolean  "up?",          default: true
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
