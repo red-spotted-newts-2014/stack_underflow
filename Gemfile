@@ -50,3 +50,7 @@ gem 'devise', '~> 3.2.4'
 # Use Bootstrap
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
+
+# Use Faker
+gem 'faker'
+
