@@ -44,3 +44,6 @@ gem 'rspec-rails', '~> 3.0.0'
 # Use Capybara
 gem 'capybara'
 
+# Use Devise
+gem 'devise', '~> 3.2.4'
+
