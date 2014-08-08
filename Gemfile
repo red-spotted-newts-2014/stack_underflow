@@ -29,6 +29,8 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'factory_girl'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
@@ -46,6 +48,8 @@ gem 'capybara'
 
 # Use Devise
 gem 'devise', '~> 3.2.4'
+<<<<<<< HEAD
+=======
 
 # Use Bootstrap
 gem 'bootstrap-sass', '~> 3.2.0'
@@ -54,3 +58,4 @@ gem 'autoprefixer-rails'
 # Use Faker
 gem 'faker'
 
+>>>>>>> master
