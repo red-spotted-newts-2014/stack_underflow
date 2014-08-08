@@ -3,6 +3,10 @@ class QuestionsController < ApplicationController
 		@questions = Question.all
 	end
 
+	def unanswered
+		@questions = Question.unanswered
+	end
+
 	def new
 		@question = Question.new
 	end

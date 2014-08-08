@@ -9,11 +9,11 @@
 User.create(email: "test@test.test")
 
 5.times do
-  Question.create(title: "Test Question title", body: "Test Question Body")
+  Question.create(title: Faker::Lorem.sentence, body: Faker::Lorem.sentence)
 end
 
 10.times do
-  Answer.create(body: "Test Answer Body")
+  Answer.create(body: Faker::Lorem.sentence)
 end
 
 
@@ -34,13 +34,13 @@ end
 Question.all.each do |q|
   rand(5..9).times do
     q.answers << Answer.all.sample
-    q.responses << Response.create(body: "TEST Response Body")
+    q.responses << Response.create(body: Faker::Lorem.sentence)
     q.tags << Tag.all.sample
   end
 end
 
 Answer.all.each do |a|
   5.times do
-    a.responses << Response.create(body: "TEST Response Body")
+    a.responses << Response.create(body: Faker::Lorem.sentence)
   end
 end
