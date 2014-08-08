@@ -1,10 +1,4 @@
-class AnswersController < ApplicationController
+class VotesController < ApplicationController
   def create
-  end
-
-  private
-
-  def answer_params
-    params.require(:vote).permit(:up?)
   end
 end

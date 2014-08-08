@@ -1,8 +1,11 @@
 class AnswersController < ApplicationController
   def create
+    Answer.create(post_params)
   end
 
   def destroy
+    answer = Answer.find(params[:id])
+    answer.destroy
   end
 
   private
