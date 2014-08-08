@@ -1,0 +1,15 @@
+<h1> 
+  <%= @question.title%> 
+</h1><br>
+<p>
+  <%= @question.body %>
+</p><br><br>
+
+<h4>
+ What have people been saying about your question...
+</h4>
+<p>
+ <% @question.responses.each do |response| %>
+  <%= response.body  %><br><br>
+  <% end %>
+</p>

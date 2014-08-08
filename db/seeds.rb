@@ -5,3 +5,30 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.create(email: "test@test.test")
+
+5.times do
+  Question.create(title: "Test Question title", body: "Test Question Body")
+end
+
+10.times do
+  Answer.create(body: "Test Answer Body")
+end
+
+User.all.each do |user|
+  user.questions << Question.all.sample
+end
+
+Question.all.each do |q|
+  rand(5..9).times do
+    q.answers << Answer.all.sample
+    q.responses << Response.create(body: "TEST Response Body")
+  end
+end
+
+Answer.all.each do |a|
+  5.times do
+    a.responses << Response.create(body: "TEST Response Body")
+  end
+end
