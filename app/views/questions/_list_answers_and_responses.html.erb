@@ -1,0 +1,10 @@
+<div>
+	<% @question.answers.each do |ans| %>
+		<p>
+			<%= ans.body %><br>
+			<% ans.responses.each do |res| %>
+				<p><%= res.body %><p>
+			<% end %>
+		</p>
+	<% end %>
+</div>
