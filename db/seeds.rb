@@ -9,5 +9,5 @@
 
 #Create some questions
 5.times do |question|
-		Question.create(title: "Yo wassup bro", body: "body stuff here")
+		Question.create(title: Faker::Lorem.sentence, body: Faker::Lorem.sentence)
 end
