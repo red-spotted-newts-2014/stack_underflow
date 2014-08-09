@@ -1,3 +1,15 @@
-<% @tags.each do |tag| %>
-<p><%= link_to tag.name, tag_path(tag) %></p>
-<% end %>
+<div class="panel panel-default">
+
+  <div class="panel-heading">Questions</div>
+  <div class="panel-body">
+    <p>Here is the list of all the tags currently in use!</p>
+  </div>
+
+  <ul class="list-group">
+    <% @tags.each do |tag| %>
+    <li class="list-group-item">
+      <%= link_to tag.name, tag_path(tag) %>
+    </li>
+    <% end %>
+  </ul>
+</div>
