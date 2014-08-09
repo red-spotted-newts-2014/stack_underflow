@@ -11,4 +11,9 @@ class Question < ActiveRecord::Base
   validates :body, presence: true,
                     length: { minimum: 5 }  
   validates :title, uniqueness: true
+
+  def self.unanswered
+    self.all.select { |x| p x if x.answers.length == 0 }
+  end
+
 end
