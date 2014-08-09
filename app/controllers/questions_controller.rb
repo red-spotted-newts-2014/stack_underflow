@@ -5,12 +5,16 @@ class QuestionsController < ApplicationController
 
 	def new
 		@question = Question.new
+
+
 	end
 
 	def create
 	  @question = Question.new(question_params)
+
 	 	
 	  if @question.save
+	  	params[:question][:tags].split(", ").each { |tag| QuestionTag.create(question_id: @question.id, tag_id: Tag.find_or_create_by(name: tag).id)}
 	  	redirect_to @question
 	  else
 	  	render 'new'
