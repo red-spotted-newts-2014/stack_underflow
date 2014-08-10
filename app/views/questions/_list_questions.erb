@@ -1,3 +1,16 @@
-<% @questions.each do |question| %>
-	<%= link_to question.title, question %><br>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Questions</div>
+  <div class="panel-body">
+    <p>Here is the list of all the currently available questions!</p>
+  </div>
+ 
+  <ul class="list-group">
+     <% @questions.each do |question| %>
+    <li class="list-group-item">  <%= link_to question.title, question %>
+    </li>
+
 <% end %>
+  </ul>
+</div>
