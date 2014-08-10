@@ -2,5 +2,6 @@
 /log/*.log
 /tmp
 db/development.sqlite3
+db/test.sqlite3
 log/development.log
 .DS_Store
