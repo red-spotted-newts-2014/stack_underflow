@@ -15,7 +15,6 @@ class ResponsesController < ActionController::Base
   end
 
   def update
-
     @response.update(response_params)
     if @response.save(response_params)
       redirect_to(@response)

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :questions
   resources :tags
+  resources :responses
 
   get '/question/unanswered', to: 'questions#unanswered', as: 'unanswered_question'
 
