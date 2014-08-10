@@ -1,4 +1,10 @@
 class ResponsesController < ActionController::Base
+  before_filter :load
+
+  def load
+    @responses = Response.all
+    @response = Response.new
+  end
 
   def new
     @response = Response.new
@@ -7,6 +13,7 @@ class ResponsesController < ActionController::Base
   def create
     @response = Response.create(response_params)
     render :json => @response.to_json
+    redirect to @question
   end
 
 

@@ -23,13 +23,20 @@
   </center>
 </div>
 <div>
-  <ul class="list-group">
-   <% @question.responses.each do |response| %>
+  <ol class="list-group">
+   <% @question.answers.each do |answer| %>
    <li class="list-group-item">  
-    <%= response.body  %>
+    &#10097<%= answer.body  %>
   </li>
+  <ul>
+  <% answer.responses.each do |response| %>
+    <li>
+      <%= response.body %><br>
+    </li>  
   <% end %>
-</ul>
+  </ul>
+  <% end %>
+</ol>
 </div>
 
 
