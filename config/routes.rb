@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get '/question/unanswered', to: 'questions#unanswered', as: 'unanswered_question'
 
+  post '/questions/create', to: 'questions#create'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 end
