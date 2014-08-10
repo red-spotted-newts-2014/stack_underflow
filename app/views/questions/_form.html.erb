@@ -1,23 +1,28 @@
-<%= form_for @question, url: {action: "create"} do |f| %>
-  <p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>Create Your Question</h2>
+  </div>
+
+  <div class="panel-body">
+   <%= form_for @question, url: {action: "create"} do |f| %>
+
+   <div class="form-group">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
-  </p>
- 
-  <p>
+  </div>
+
+  <div class="form-group">
     <%= f.label :body %><br>
     <%= f.text_area :body %>
-  </p>
+  </div>
 
-  <p>
+  <div class="form-group">
     <%= label_tag :tags %><br>
     <%= text_field_tag :tags %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+  </div>
 
-
-
+  <div class="form-group">
+    <%= f.submit %></button>
+  </div>
+  <% end %>
+</div>
