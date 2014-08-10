@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: "questions#index"
 
   resources :questions do
+    resources :responses, :only => [:create]
     member do
       put "like", to: "questions#upvote"
       put "dislike", to: "questions#downvote"
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
   end
 
   resources :tags
-  resources :responses
+  
 
   get '/question/unanswered', to: 'questions#unanswered', as: 'unanswered_question'
 

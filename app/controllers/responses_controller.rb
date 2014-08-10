@@ -4,11 +4,19 @@ class ResponsesController < ActionController::Base
     @response = Response.new
   end
 
-  def create
-    @response = Response.create(response_params)
-    render :json => @response.to_json
-  end
+  # def create
+  #   @response = Response.create(response_params)
+  # end
 
+  def create
+    @question = Question.find(params[:question_id])
+    @response = @question.responses.create!(params[:response])
+    respond_to do |format|
+      format.html { redirect_to @question }
+      format.js
+    end
+    # render :json => @response.to_json
+  end
 
   def edit
     @response = Response.find(params[:id])
