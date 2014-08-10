@@ -6,23 +6,23 @@
   <div class="panel-body">
    <%= form_for @question, url: {action: "create"} do |f| %>
 
-      <div class="form-group">
-        <%= f.label :title %><br>
-     <%= f.text_field :title %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :body %><br>
-     <%= f.text_area :body %>
-      </div>
-
-      <div class="form-group">
-        <%= label_tag :tags %><br>
-        <%= text_field_tag :tags %>
-      </div>
-
-      <div class="form-group">
-        <%= f.submit %></button>
-      </div>
-    <% end %>
+   <div class="form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
   </div>
+
+  <div class="form-group">
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :tags %><br>
+    <%= text_field_tag :tags %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit %></button>
+  </div>
+  <% end %>
+</div>

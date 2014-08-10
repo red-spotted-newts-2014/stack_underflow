@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  make_voteable
+  acts_as_votable
   has_many :answers, dependent: :destroy
   has_many :responses, as: :responsable
   has_many :votes, as: :votable
