@@ -27,10 +27,17 @@ input#user_remember_me {
 
 body {
   background-image:url('http://wallpaperslady.com/wp-content/uploads/2014/06/Jungle-Rope-Bridge-HD-Desktop-Wallpaper.jpg');
-  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .panel-default{
   
     opacity: 0.8;
 }
+
+.btn {
+  opacity: 1;
+
+}
+
