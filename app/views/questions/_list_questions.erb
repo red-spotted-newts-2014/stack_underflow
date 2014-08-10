@@ -5,12 +5,23 @@
   <div class="panel-body">
     <p>Here is the list of all the currently available questions!</p>
   </div>
- 
-  <ul class="list-group">
-     <% @questions.each do |question| %>
-    <li class="list-group-item">  <%= link_to question.title, question %>
-    </li>
 
-<% end %>
-  </ul>
+  <ul class="list-group">
+   <% @questions.each do |question| %>
+   <center><li class="list-group-item">  <%= link_to question.title, question %></center>
+    <div class= "homepage_likes">
+        <center>
+          <button type="button" class="btn btn-primary" >
+        <%=question.get_upvotes.count %> 
+          <span class="glyphicon glyphicon-thumbs-up"></span>
+      </button>
+      <button type="button" class="btn btn-primary">  
+        <%= question.get_downvotes.count %> 
+        <span class="glyphicon glyphicon-thumbs-down"></span>
+      </button><br><br>
+      <center>
+    </div>
+  </li>
+  <% end %>
+</ul>
 </div>

@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h3>
+      <%=@tag.name%>
+    </h3>
+  </div>
+  <div class="panel-body">
+   <h5> Here are al the questions listed under this tag </h5>
+ </div>
+<center>
+ <ul class="list-group">
+   <% @tag.questions.each do |question| %>
+   <li class="list-group-item">  
+    <%= link_to question.title, question_path(question) %>
+  </li>
+  <% end %>
+</ul>
+</center>
+</div>
