@@ -1,15 +1,30 @@
-<h1> 
-  <%= @question.title%> 
-</h1><br>
-<p>
-  <%= @question.body %>
-</p><br><br>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h3>
+     <%= @question.title%>
+   </h3>
+ </div>
+ <div class="panel-body">
+   <h5><%= @question.body%> </h5>
+   <div class="btn-group">
+  <button type="button" class="btn btn-primary">Place Your Vote</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="#">Like</a></li>
+    <li><a href="#">Dislike</a></li>
+  </ul>
+</div>
+ </div>
 
-<h4>
- What have people been saying about your question...
-</h4>
-<p>
- <% @question.responses.each do |response| %>
-  <%= response.body  %><br><br>
+ <ul class="list-group">
+   <% @question.responses.each do |response| %>
+   <li class="list-group-item">  
+    <%= response.body  %>
+  </li>
   <% end %>
-</p>
+</ul>
+</div>
