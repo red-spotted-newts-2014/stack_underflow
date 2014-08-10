@@ -20,7 +20,9 @@
         <li><%= link_to 'Unanswered', unanswered_question_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
         <li><%= link_to 'New Question', new_question_path %></li>
+        <% end %>
         <%= render :partial => '/signup_logic' %>  
       </ul>
     </div><!-- /.navbar-collapse -->
