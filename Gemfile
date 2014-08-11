@@ -1,14 +1,21 @@
 source 'https://rubygems.org'
+
+gem 'unicorn-rails'
+
+gem 'unicorn'
+
+gem 'pg'
+
 gem 'acts_as_votable', '~> 0.10.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 # Use pg as the database for Active Record
 group :production do
-	gem 'pg'
+  gem 'rails_12factor'
 end
 
 group :development do
-	gem 'sqlite3'
+  gem 'sqlite3'
 end
 
 # Use SCSS for stylesheets
