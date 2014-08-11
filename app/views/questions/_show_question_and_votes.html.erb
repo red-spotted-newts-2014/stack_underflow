@@ -9,7 +9,7 @@
     <center>
       <div class="btn-group">
         <button type="button" class="btn btn-success">
-          <%= link_to " like it", like_question_path(@question), method: :put %>  
+          <%= link_to "Like", like_question_path(@question), method: :put %>  
           <%= @question.get_upvotes.count %> 
           <span class="glyphicon glyphicon-thumbs-up"></span>
         </button>
@@ -19,27 +19,5 @@
           <%= link_to "Dislike", dislike_question_path(@question), method: :put %>
         </button>
       </div>
-
-      <div class="add-response">
-       <%= form_for [@question, Response.new], :remote => true do |f| %>
-         <p>
-           <%= f.label :body, "New response" %><br/>
-           <%= f.text_area :body %>
-         </p>
-         <p><%= f.submit "Add response" %></p> 
-       <% end %>
-      </div>
     </center>
   </div>
-
-<div>
-  <ul class="list-group">
-    <% @question.responses.each do |response| %>
-      <li class="list-group-item">  
-      <%= response.body  %>
-      </li>
-    <% end %>
-  </ul>
-</div>
-
-
