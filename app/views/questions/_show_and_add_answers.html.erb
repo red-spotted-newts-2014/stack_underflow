@@ -5,14 +5,16 @@
       <%= render :partial => @question.answers %>
     </div></br>
 
+<%if user_signed_in? %>
     <div class="add-response">
      <%= form_for [@question, Answer.new], :remote => true do |f| %>
        <p>
-         <%= f.label :body, "New answer" %><br/>
+         <%= f.label :body, "Answer this question" %><br/>
          <%= f.text_area :body %>
        </p>
-       <div id="add-answer-button"><p><%= f.submit "Add answer" %></p></div>
+       <div id="add-answer-button"><p><%= f.submit "Add your answer" %></p></div>
      <% end %>
     </div>
+    <% end %>
   </div>
 </div>
