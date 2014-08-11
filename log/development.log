@@ -1,28 +1,28 @@
-  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
   [1m[35m (0.1ms)[0m  select sqlite_version(*)
-  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
 Migrating to CreateAnswers (20140808150336)
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.5ms)[0m  CREATE TABLE "answers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "body" text, "user_id" integer, "question_id" integer, "created_at" datetime, "updated_at" datetime) 
-  [1m[36mSQL (1.9ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140808150336"]]
-  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[35m (0.4ms)[0m  CREATE TABLE "answers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "body" text, "user_id" integer, "question_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140808150336"]]
+  [1m[35m (1.2ms)[0m  commit transaction
 Migrating to CreateQuestions (20140808150733)
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.3ms)[0m  CREATE TABLE "questions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "body" text, "user_id" integer) 
   [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_questions_on_user_id" ON "questions" ("user_id")[0m
   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140808150733"]]
-  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
 Migrating to CreateResponses (20140808152201)
   [1m[35m (0.1ms)[0m  begin transaction
-  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "responses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "responsable_id" integer, "responsable_type" varchar(255), "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "responses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "responsable_id" integer, "responsable_type" varchar(255), "body" text, "created_at" datetime, "updated_at" datetime) [0m
   [1m[35m (0.1ms)[0m  CREATE  INDEX "index_responses_on_responsable_id" ON "responses" ("responsable_id")
   [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140808152201"]]
-  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[35m (1.6ms)[0m  commit transaction
 Migrating to DeviseCreateUsers (20140808152358)
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.4ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime, "updated_at" datetime) 
-  [1m[36m (0.8ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[36m (0.3ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
   [1m[35m (0.1ms)[0m              SELECT sql
             FROM sqlite_master
             WHERE name='index_users_on_email' AND type='index'
@@ -33,12 +33,12 @@ Migrating to DeviseCreateUsers (20140808152358)
 
   [1m[36m (0.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140808152358"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
 Migrating to CreateTags (20140808181012)
   [1m[35m (0.1ms)[0m  begin transaction
   [1m[36m (0.3ms)[0m  [1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255)) [0m
   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140808181012"]]
-  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
 Migrating to CreateQuestionTags (20140808183228)
   [1m[35m (0.1ms)[0m  begin transaction
   [1m[36m (0.3ms)[0m  [1mCREATE TABLE "question_tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "question_id" integer, "tag_id" integer) [0m
@@ -51,12 +51,12 @@ Migrating to CreateQuestionTags (20140808183228)
             FROM sqlite_temp_master
             WHERE name='index_question_tags_on_question_id' AND type='index'
 [0m
-  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_question_tags_on_tag_id" ON "question_tags" ("tag_id")
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140808183228"]]
-  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_question_tags_on_tag_id" ON "question_tags" ("tag_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140808183228"]]
+  [1m[35m (1.3ms)[0m  commit transaction
 Migrating to ActsAsVotableMigration (20140810012704)
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.6ms)[0m  CREATE TABLE "votes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "votable_id" integer, "votable_type" varchar(255), "voter_id" integer, "voter_type" varchar(255), "vote_flag" boolean, "vote_scope" varchar(255), "vote_weight" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[35m (0.4ms)[0m  CREATE TABLE "votes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "votable_id" integer, "votable_type" varchar(255), "voter_id" integer, "voter_type" varchar(255), "vote_flag" boolean, "vote_scope" varchar(255), "vote_weight" integer, "created_at" datetime, "updated_at" datetime) 
   [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_votes_on_voter_id_and_voter_type_and_vote_scope" ON "votes" ("voter_id", "voter_type", "vote_scope")[0m
   [1m[35m (0.1ms)[0m              SELECT sql
             FROM sqlite_master
@@ -66,9 +66,9 @@ Migrating to ActsAsVotableMigration (20140810012704)
             FROM sqlite_temp_master
             WHERE name='index_votes_on_voter_id_and_voter_type_and_vote_scope' AND type='index'
 
-  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_votes_on_votable_id_and_votable_type_and_vote_scope" ON "votes" ("votable_id", "votable_type", "vote_scope")[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140810012704"]]
-  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_votes_on_votable_id_and_votable_type_and_vote_scope" ON "votes" ("votable_id", "votable_type", "vote_scope")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140810012704"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
   [1m[36m (0.2ms)[0m  [1m            SELECT sql
             FROM sqlite_master
@@ -78,48 +78,48 @@ Migrating to ActsAsVotableMigration (20140810012704)
             FROM sqlite_temp_master
             WHERE name='index_question_tags_on_tag_id' AND type='index'
 [0m
-  [1m[35m (0.1ms)[0m              SELECT sql
-            FROM sqlite_master
-            WHERE name='index_question_tags_on_question_id' AND type='index'
-            UNION ALL
-            SELECT sql
-            FROM sqlite_temp_master
-            WHERE name='index_question_tags_on_question_id' AND type='index'
-
-  [1m[36m (0.2ms)[0m  [1m            SELECT sql
-            FROM sqlite_master
-            WHERE name='index_questions_on_user_id' AND type='index'
-            UNION ALL
-            SELECT sql
-            FROM sqlite_temp_master
-            WHERE name='index_questions_on_user_id' AND type='index'
-[0m
   [1m[35m (0.2ms)[0m              SELECT sql
             FROM sqlite_master
-            WHERE name='index_responses_on_responsable_id' AND type='index'
+            WHERE name='index_question_tags_on_question_id' AND type='index'
             UNION ALL
             SELECT sql
             FROM sqlite_temp_master
-            WHERE name='index_responses_on_responsable_id' AND type='index'
+            WHERE name='index_question_tags_on_question_id' AND type='index'
 
   [1m[36m (0.2ms)[0m  [1m            SELECT sql
             FROM sqlite_master
-            WHERE name='index_users_on_reset_password_token' AND type='index'
+            WHERE name='index_questions_on_user_id' AND type='index'
             UNION ALL
             SELECT sql
             FROM sqlite_temp_master
-            WHERE name='index_users_on_reset_password_token' AND type='index'
+            WHERE name='index_questions_on_user_id' AND type='index'
 [0m
   [1m[35m (0.1ms)[0m              SELECT sql
             FROM sqlite_master
-            WHERE name='index_users_on_email' AND type='index'
+            WHERE name='index_responses_on_responsable_id' AND type='index'
             UNION ALL
             SELECT sql
             FROM sqlite_temp_master
-            WHERE name='index_users_on_email' AND type='index'
+            WHERE name='index_responses_on_responsable_id' AND type='index'
 
   [1m[36m (0.1ms)[0m  [1m            SELECT sql
             FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
             WHERE name='index_votes_on_votable_id_and_votable_type_and_vote_scope' AND type='index'
             UNION ALL
             SELECT sql
@@ -134,549 +134,560 @@ Migrating to ActsAsVotableMigration (20140810012704)
             FROM sqlite_temp_master
             WHERE name='index_votes_on_voter_id_and_voter_type_and_vote_scope' AND type='index'
 
-  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
   [1m[35m (0.1ms)[0m  begin transaction
   [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test@test.test' LIMIT 1[0m
   [1m[35m (0.1ms)[0m  rollback transaction
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mQuestion Exists (0.2ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'In ullam beatae deleniti repellendus minus.' LIMIT 1
-  [1m[36mSQL (2.2ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Et omnis voluptas ut. Commodi molestiae libero. Qui et officia fuga vero. Non exercitationem perspiciatis ea adipisci."], ["title", "In ullam beatae deleniti repellendus minus."]]
+  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Eum vero rem et possimus id voluptatem recusandae aut.' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Qui eaque harum quia blanditiis dicta molestias. Ipsa ut eius. Asperiores rerum voluptate."], ["title", "Eum vero rem et possimus id voluptatem recusandae aut."]]
   [1m[35m (2.4ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Vel amet quo qui asperiores quidem voluptatem quia rerum.' LIMIT 1
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Dignissimos natus voluptatibus. Est earum amet omnis ipsa ducimus. Consequatur ipsum omnis modi autem sit. Voluptatibus a aut iusto commodi possimus unde. Eos vitae doloremque."], ["title", "Vel amet quo qui asperiores quidem voluptatem quia rerum."]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Quidem earum excepturi ipsa harum pariatur amet dolore.' LIMIT 1
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Dolores corporis sit rerum ex. Quis est quia. Qui aliquam quasi natus est non."], ["title", "Quidem earum excepturi ipsa harum pariatur amet dolore."]]
-  [1m[35m (0.8ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Velit in voluptas qui maiores.' LIMIT 1
-  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Illo aliquid modi id. Nostrum sint aliquam iste modi totam. Delectus totam laborum et."], ["title", "Velit in voluptas qui maiores."]]
-  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Vero delectus omnis neque consequuntur sed tempora.' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Quia voluptates iure. Dolores ad vel dolor qui quo esse. Quis aut sed molestiae necessitatibus. Eum magni eveniet perferendis adipisci. Qui et sed sequi omnis doloremque a fugiat."], ["title", "Vero delectus omnis neque consequuntur sed tempora."]]
+  [1m[35m (1.2ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Maxime doloremque cupiditate molestiae et sunt rerum.' LIMIT 1
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Aut fugit corporis deleniti. Velit similique iste explicabo ut ut illum. Animi iure incidunt quod et dolores voluptatem. Id excepturi qui eos eum dolorum doloribus quis. Incidunt cumque et vel qui ea tenetur."], ["title", "Maxime doloremque cupiditate molestiae et sunt rerum."]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Laboriosam est molestiae eos animi quaerat.' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Pariatur repellat sint mollitia modi aperiam sunt quisquam. Quasi voluptatem earum. Est quas eveniet impedit. Eum velit fugit."], ["title", "Laboriosam est molestiae eos animi quaerat."]]
+  [1m[35m (1.8ms)[0m  commit transaction
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.4ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "Try to parse the THX hard drive, maybe it will navigate the digital bandwidth!"], ["created_at", "2014-08-11 11:22:24.527775"], ["updated_at", "2014-08-11 11:22:24.527775"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Laborum omnis rerum sunt.' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Commodi dolor dolorum omnis. Et dolore hic repellat natus ea. Aut ullam a pariatur quae. A vitae natus perferendis praesentium quod deleniti earum."], ["title", "Laborum omnis rerum sunt."]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mQuestion Exists (0.1ms)[0m  SELECT  1 AS one FROM "questions"  WHERE "questions"."title" = 'Ut magnam praesentium adipisci nisi exercitationem voluptate alias.' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("body", "title") VALUES (?, ?)[0m  [["body", "Nesciunt quaerat natus itaque voluptates. Iusto animi in consequatur rerum praesentium voluptas dolorum. Nihil et dignissimos qui ut amet delectus. Velit qui non eum ut inventore quibusdam. Molestiae et quasi."], ["title", "Ut magnam praesentium adipisci nisi exercitationem voluptate alias."]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "If we compress the circuit, we can get to the USB firewall through the auxiliary EXE firewall!"], ["created_at", "2014-08-11 13:29:45.323107"], ["updated_at", "2014-08-11 13:29:45.323107"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "If we calculate the monitor, we can get to the EXE transmitter through the back-end PNG microchip!"], ["created_at", "2014-08-11 11:22:24.535855"], ["updated_at", "2014-08-11 11:22:24.535855"]]
-  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "Use the mobile XML transmitter, then you can transmit the virtual monitor!"], ["created_at", "2014-08-11 13:29:45.329304"], ["updated_at", "2014-08-11 13:29:45.329304"]]
+  [1m[35m (1.9ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "If we copy the interface, we can get to the RAM card through the cross-platform USB interface!"], ["created_at", "2014-08-11 11:22:24.538833"], ["updated_at", "2014-08-11 11:22:24.538833"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "We need to navigate the cross-platform GB program!"], ["created_at", "2014-08-11 11:22:24.541855"], ["updated_at", "2014-08-11 11:22:24.541855"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "The FTP protocol is down, connect the 1080p panel so we can compress the HTTP firewall!"], ["created_at", "2014-08-11 11:22:24.545384"], ["updated_at", "2014-08-11 11:22:24.545384"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "We need to parse the 1080p HDD pixel!"], ["created_at", "2014-08-11 13:29:45.333781"], ["updated_at", "2014-08-11 13:29:45.333781"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.1ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "Try to override the RAM driver, maybe it will hack the open-source protocol!"], ["created_at", "2014-08-11 11:22:24.548444"], ["updated_at", "2014-08-11 11:22:24.548444"]]
-  [1m[35m (0.6ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "hacking the application won't do anything, we need to back up the primary SQL capacitor!"], ["created_at", "2014-08-11 11:22:24.551385"], ["updated_at", "2014-08-11 11:22:24.551385"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.1ms)[0m  begin transaction
-  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "bypassing the interface won't do anything, we need to generate the mobile RAM interface!"], ["created_at", "2014-08-11 11:22:24.554797"], ["updated_at", "2014-08-11 11:22:24.554797"]]
-  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "We need to transmit the redundant XML feed!"], ["created_at", "2014-08-11 13:29:45.338163"], ["updated_at", "2014-08-11 13:29:45.338163"]]
+  [1m[35m (1.5ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "calculating the circuit won't do anything, we need to hack the optical SQL feed!"], ["created_at", "2014-08-11 11:22:24.558450"], ["updated_at", "2014-08-11 11:22:24.558450"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "The EXE hard drive is down, compress the open-source firewall so we can back up the HTTP system!"], ["created_at", "2014-08-11 13:29:45.342329"], ["updated_at", "2014-08-11 13:29:45.342329"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "I'll program the 1080p PCI card, that should matrix the RSS pixel!"], ["created_at", "2014-08-11 11:22:24.561323"], ["updated_at", "2014-08-11 11:22:24.561323"]]
-  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "Try to bypass the USB driver, maybe it will reboot the mobile application!"], ["created_at", "2014-08-11 13:29:45.346007"], ["updated_at", "2014-08-11 13:29:45.346007"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "We need to connect the multi-byte SMS card!"], ["created_at", "2014-08-11 13:29:45.349699"], ["updated_at", "2014-08-11 13:29:45.349699"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "programming the matrix won't do anything, we need to compress the 1080p EXE array!"], ["created_at", "2014-08-11 13:29:45.353627"], ["updated_at", "2014-08-11 13:29:45.353627"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)  [["body", "If we parse the alarm, we can get to the AGP circuit through the neural COM panel!"], ["created_at", "2014-08-11 13:29:45.357220"], ["updated_at", "2014-08-11 13:29:45.357220"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("body", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["body", "Use the virtual FTP sensor, then you can back up the mobile driver!"], ["created_at", "2014-08-11 13:29:45.360413"], ["updated_at", "2014-08-11 13:29:45.360413"]]
+  [1m[35m (1.1ms)[0m  commit transaction
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
   [1m[35mSQL (0.3ms)[0m  INSERT INTO "tags" ("name") VALUES (?)  [["name", "testTag1"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
   [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tags" ("name") VALUES (?)[0m  [["name", "testTag2"]]
-  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[35m (1.3ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
   [1m[35mSQL (0.2ms)[0m  INSERT INTO "tags" ("name") VALUES (?)  [["name", "testTag3"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
   [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tags" ("name") VALUES (?)[0m  [["name", "testTag4"]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[35m (1.6ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
   [1m[35mSQL (0.2ms)[0m  INSERT INTO "tags" ("name") VALUES (?)  [["name", "testTag5"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
   [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tags" ("name") VALUES (?)[0m  [["name", "testTag6"]]
-  [1m[35m (0.9ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "tags" ("name") VALUES (?)  [["name", "testTag7"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tags" ("name") VALUES (?)  [["name", "testTag7"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
   [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
   [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
   [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.4ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 6  [["question_id", 1], ["updated_at", "2014-08-11 11:22:24.628362"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 10  [["question_id", 1], ["updated_at", "2014-08-11 13:29:45.399237"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.1ms)[0m  begin transaction
   [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "You can't generate the bandwidth without synthesizing the open-source SMS bus!"], ["created_at", "2014-08-11 11:22:24.642009"], ["responsable_id", 1], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.642009"]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "If we generate the array, we can get to the HTTP array through the back-end FTP microchip!"], ["created_at", "2014-08-11 13:29:45.414356"], ["responsable_id", 1], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.414356"]]
+  [1m[35m (1.6ms)[0m  commit transaction
   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 1], ["tag_id", 3]]
-  [1m[35m (0.8ms)[0m  commit transaction
-  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 2[0m  [["question_id", 1], ["updated_at", "2014-08-11 11:22:24.659815"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Use the optical AI monitor, then you can transmit the 1080p sensor!"], ["created_at", "2014-08-11 11:22:24.663844"], ["responsable_id", 1], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.663844"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags"
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 1], ["tag_id", 6]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 10  [["question_id", 1], ["updated_at", "2014-08-11 11:22:24.670207"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.1ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "We need to reboot the haptic RAM bus!"], ["created_at", "2014-08-11 11:22:24.674430"], ["responsable_id", 1], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.674430"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 1], ["tag_id", 6]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 1], ["tag_id", 1]]
+  [1m[35m (1.6ms)[0m  commit transaction
   [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 8[0m  [["question_id", 2], ["updated_at", "2014-08-11 11:22:24.680307"]]
-  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Try to transmit the SQL system, maybe it will reboot the mobile pixel!"], ["created_at", "2014-08-11 13:29:45.436257"], ["responsable_id", 1], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.436257"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 1], ["tag_id", 7]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 2[0m  [["question_id", 1], ["updated_at", "2014-08-11 13:29:45.443667"]]
+  [1m[35m (1.1ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[35m (0.1ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "I'll hack the back-end AI port, that should port the AGP monitor!"], ["created_at", "2014-08-11 11:22:24.685082"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.685082"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "The SMS card is down, reboot the haptic feed so we can transmit the HTTP port!"], ["created_at", "2014-08-11 13:29:45.492731"], ["responsable_id", 1], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.492731"]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags"
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 2], ["tag_id", 5]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 1], ["tag_id", 6]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 2  [["question_id", 2], ["updated_at", "2014-08-11 11:22:24.691023"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 4  [["question_id", 2], ["updated_at", "2014-08-11 13:29:45.501450"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.1ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The AI interface is down, transmit the redundant capacitor so we can quantify the PNG feed!"], ["created_at", "2014-08-11 11:22:24.695012"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.695012"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 2], ["tag_id", 5]]
-  [1m[35m (0.9ms)[0m  commit transaction
-  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 9[0m  [["question_id", 2], ["updated_at", "2014-08-11 11:22:24.700893"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "We need to connect the bluetooth THX bandwidth!"], ["created_at", "2014-08-11 11:22:24.704920"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.704920"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags"
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 2], ["tag_id", 2]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 8  [["question_id", 3], ["updated_at", "2014-08-11 11:22:24.710473"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "If we transmit the program, we can get to the GB port through the bluetooth PCI hard drive!"], ["created_at", "2014-08-11 11:22:24.714437"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.714437"]]
-  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Try to back up the RAM system, maybe it will parse the digital hard drive!"], ["created_at", "2014-08-11 13:29:45.507796"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.507796"]]
+  [1m[35m (1.3ms)[0m  commit transaction
   [1m[36mTag Load (0.2ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 3], ["tag_id", 5]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 2], ["tag_id", 1]]
+  [1m[35m (1.6ms)[0m  commit transaction
   [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 2[0m  [["question_id", 2], ["updated_at", "2014-08-11 13:29:45.515737"]]
+  [1m[35m (1.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "compressing the protocol won't do anything, we need to back up the redundant RAM port!"], ["created_at", "2014-08-11 13:29:45.521670"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.521670"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 2], ["tag_id", 6]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 6  [["question_id", 2], ["updated_at", "2014-08-11 13:29:45.529721"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Try to bypass the XML capacitor, maybe it will quantify the mobile system!"], ["created_at", "2014-08-11 13:29:45.535370"], ["responsable_id", 2], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.535370"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 2], ["tag_id", 7]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 1[0m  [["question_id", 3], ["updated_at", "2014-08-11 13:29:45.542897"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Use the auxiliary HDD sensor, then you can copy the redundant feed!"], ["created_at", "2014-08-11 13:29:45.547805"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.547805"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 3], ["tag_id", 1]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 9  [["question_id", 3], ["updated_at", "2014-08-11 13:29:45.555858"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
   [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "I'll navigate the cross-platform SSL transmitter, that should panel the RSS matrix!"], ["created_at", "2014-08-11 11:22:24.723145"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.723145"]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The HDD application is down, compress the bluetooth microchip so we can compress the SQL array!"], ["created_at", "2014-08-11 13:29:45.561008"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.561008"]]
+  [1m[35m (1.6ms)[0m  commit transaction
   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 3], ["tag_id", 2]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 3], ["tag_id", 6]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 7[0m  [["question_id", 3], ["updated_at", "2014-08-11 11:22:24.728564"]]
-  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 10[0m  [["question_id", 3], ["updated_at", "2014-08-11 13:29:45.568547"]]
+  [1m[35m (1.4ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[35m (0.1ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "The SMS application is down, navigate the multi-byte system so we can program the SSL feed!"], ["created_at", "2014-08-11 11:22:24.732125"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.732125"]]
-  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
-  [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags"
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "We need to reboot the online RAM pixel!"], ["created_at", "2014-08-11 13:29:45.573549"], ["responsable_id", 3], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.573549"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
   [1m[35mSQL (0.3ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 3], ["tag_id", 1]]
-  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
   [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 8  [["question_id", 4], ["updated_at", "2014-08-11 11:22:24.739870"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 3  [["question_id", 4], ["updated_at", "2014-08-11 13:29:45.581469"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Use the bluetooth FTP card, then you can bypass the primary panel!"], ["created_at", "2014-08-11 11:22:24.743996"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.743996"]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Try to synthesize the XML hard drive, maybe it will hack the optical application!"], ["created_at", "2014-08-11 13:29:45.586706"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.586706"]]
+  [1m[35m (1.2ms)[0m  commit transaction
   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 4], ["tag_id", 4]]
-  [1m[35m (0.8ms)[0m  commit transaction
-  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 4], ["tag_id", 7]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
   [1m[35m (0.0ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[35m (0.0ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "You can't quantify the monitor without transmitting the online PNG matrix!"], ["created_at", "2014-08-11 11:22:24.752644"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.752644"]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Use the open-source CSS system, then you can copy the multi-byte driver!"], ["created_at", "2014-08-11 13:29:45.596478"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.596478"]]
+  [1m[35m (2.1ms)[0m  commit transaction
   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 4], ["tag_id", 7]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 4], ["tag_id", 1]]
+  [1m[35m (1.6ms)[0m  commit transaction
   [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 2[0m  [["question_id", 4], ["updated_at", "2014-08-11 11:22:24.758733"]]
-  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 7[0m  [["question_id", 4], ["updated_at", "2014-08-11 13:29:45.604516"]]
+  [1m[35m (1.2ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[35m (0.0ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "synthesizing the program won't do anything, we need to transmit the haptic RSS panel!"], ["created_at", "2014-08-11 11:22:24.762375"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.762375"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "If we connect the microchip, we can get to the GB pixel through the digital SDD port!"], ["created_at", "2014-08-11 13:29:45.609044"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.609044"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags"
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 4], ["tag_id", 5]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 4], ["tag_id", 6]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
   [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 8  [["question_id", 5], ["updated_at", "2014-08-11 11:22:24.768596"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "The COM alarm is down, parse the cross-platform application so we can input the USB pixel!"], ["created_at", "2014-08-11 13:29:45.618545"], ["responsable_id", 4], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.618545"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 4], ["tag_id", 2]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 10  [["question_id", 5], ["updated_at", "2014-08-11 13:29:45.626706"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "calculating the monitor won't do anything, we need to quantify the bluetooth TCP monitor!"], ["created_at", "2014-08-11 11:22:24.772805"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.772805"]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "copying the pixel won't do anything, we need to connect the bluetooth SQL bus!"], ["created_at", "2014-08-11 13:29:45.631921"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.631921"]]
+  [1m[35m (1.9ms)[0m  commit transaction
   [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 5], ["tag_id", 6]]
-  [1m[35m (0.8ms)[0m  commit transaction
-  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 5], ["tag_id", 5]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 3[0m  [["question_id", 5], ["updated_at", "2014-08-11 11:22:24.778692"]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 8[0m  [["question_id", 5], ["updated_at", "2014-08-11 13:29:45.640617"]]
+  [1m[35m (1.6ms)[0m  commit transaction
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.0ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Try to generate the SSL monitor, maybe it will connect the redundant feed!"], ["created_at", "2014-08-11 11:22:24.782764"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.782764"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags"
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 5], ["tag_id", 1]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 10  [["question_id", 5], ["updated_at", "2014-08-11 11:22:24.788816"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "If we generate the transmitter, we can get to the RSS interface through the auxiliary GB circuit!"], ["created_at", "2014-08-11 11:22:24.792690"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.792690"]]
-  [1m[35m (0.8ms)[0m  commit transaction
-  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 5], ["tag_id", 4]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 1[0m  [["question_id", 5], ["updated_at", "2014-08-11 11:22:24.798274"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.1ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "I'll back up the solid state RSS hard drive, that should bus the SMS protocol!"], ["created_at", "2014-08-11 11:22:24.802347"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.802347"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "The THX system is down, program the auxiliary hard drive so we can override the SSL monitor!"], ["created_at", "2014-08-11 13:29:45.645972"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.645972"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags"
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 5], ["tag_id", 7]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 5], ["tag_id", 4]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
   [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.0ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.0ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "The PCI interface is down, copy the multi-byte application so we can index the TCP panel!"], ["created_at", "2014-08-11 11:22:24.810727"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-11 11:22:24.810727"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "We need to synthesize the haptic SQL sensor!"], ["created_at", "2014-08-11 13:29:45.655908"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.655908"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
   [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags"
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 5], ["tag_id", 3]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 5], ["tag_id", 3]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT "answers".* FROM "answers"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "copying the alarm won't do anything, we need to compress the back-end EXE array!"], ["created_at", "2014-08-11 13:29:45.665578"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.665578"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags"
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)  [["question_id", 5], ["tag_id", 4]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
   [1m[35mAnswer Load (0.1ms)[0m  SELECT "answers".* FROM "answers"
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.1ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "navigating the alarm won't do anything, we need to connect the haptic SMS panel!"], ["created_at", "2014-08-11 11:22:24.819686"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.819686"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "answers" SET "question_id" = ?, "updated_at" = ? WHERE "answers"."id" = 1  [["question_id", 5], ["updated_at", "2014-08-11 13:29:45.673459"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The GB capacitor is down, parse the auxiliary array so we can generate the SMS microchip!"], ["created_at", "2014-08-11 11:22:24.823464"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.823464"]]
-  [1m[35m (0.6ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "You can't index the driver without copying the multi-byte HTTP bus!"], ["created_at", "2014-08-11 11:22:24.827042"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.827042"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "We need to connect the digital SSL feed!"], ["created_at", "2014-08-11 13:29:45.678027"], ["responsable_id", 5], ["responsable_type", "Question"], ["updated_at", "2014-08-11 13:29:45.678027"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "question_tags" ("question_id", "tag_id") VALUES (?, ?)[0m  [["question_id", 5], ["tag_id", 2]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36mAnswer Load (0.2ms)[0m  [1mSELECT "answers".* FROM "answers"[0m
   [1m[35m (0.0ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "If we copy the circuit, we can get to the RSS transmitter through the multi-byte HDD capacitor!"], ["created_at", "2014-08-11 11:22:24.830559"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.830559"]]
-  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The SMS monitor is down, calculate the solid state firewall so we can parse the COM monitor!"], ["created_at", "2014-08-11 13:29:45.689009"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.689009"]]
+  [1m[35m (1.6ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.0ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "If we parse the bus, we can get to the EXE hard drive through the redundant USB card!"], ["created_at", "2014-08-11 11:22:24.834069"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.834069"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "The ADP hard drive is down, reboot the optical firewall so we can bypass the CSS driver!"], ["created_at", "2014-08-11 13:29:45.694979"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.694979"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "I'll bypass the back-end EXE transmitter, that should interface the XML hard drive!"], ["created_at", "2014-08-11 13:29:45.699670"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.699670"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Use the neural RAM alarm, then you can parse the solid state array!"], ["created_at", "2014-08-11 13:29:45.704251"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.704251"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "quantifying the bandwidth won't do anything, we need to compress the online FTP card!"], ["created_at", "2014-08-11 13:29:45.709324"], ["responsable_id", 1], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.709324"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "I'll back up the cross-platform FTP monitor, that should monitor the AGP program!"], ["created_at", "2014-08-11 13:29:45.714441"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.714441"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "If we back up the system, we can get to the USB bandwidth through the bluetooth PNG program!"], ["created_at", "2014-08-11 13:29:45.719219"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.719219"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "You can't reboot the hard drive without copying the neural RAM microchip!"], ["created_at", "2014-08-11 13:29:45.724063"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.724063"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.1ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Use the mobile FTP microchip, then you can compress the bluetooth circuit!"], ["created_at", "2014-08-11 11:22:24.838321"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.838321"]]
-  [1m[35m (0.8ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "If we override the monitor, we can get to the PNG driver through the cross-platform FTP panel!"], ["created_at", "2014-08-11 13:29:45.729939"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.729939"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.0ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "We need to connect the wireless SMTP transmitter!"], ["created_at", "2014-08-11 11:22:24.842516"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.842516"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "programming the program won't do anything, we need to program the haptic TCP interface!"], ["created_at", "2014-08-11 13:29:45.734843"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.734843"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The SMS alarm is down, index the bluetooth circuit so we can index the ADP card!"], ["created_at", "2014-08-11 11:22:24.846343"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.846343"]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "You can't index the circuit without navigating the bluetooth FTP transmitter!"], ["created_at", "2014-08-11 13:29:45.740306"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.740306"]]
+  [1m[35m (2.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "We need to quantify the mobile PNG application!"], ["created_at", "2014-08-11 13:29:45.746267"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.746267"]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Use the redundant HDD program, then you can generate the multi-byte array!"], ["created_at", "2014-08-11 13:29:45.752108"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.752108"]]
+  [1m[35m (2.3ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.0ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Use the 1080p TCP circuit, then you can back up the optical alarm!"], ["created_at", "2014-08-11 11:22:24.849864"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.849864"]]
-  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "I'll parse the multi-byte GB sensor, that should protocol the THX bandwidth!"], ["created_at", "2014-08-11 13:29:45.757689"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.757689"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "You can't index the bus without bypassing the bluetooth EXE array!"], ["created_at", "2014-08-11 13:29:45.763217"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.763217"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "We need to bypass the digital USB protocol!"], ["created_at", "2014-08-11 13:29:45.770014"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.770014"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
   [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The GB microchip is down, override the haptic capacitor so we can generate the FTP bandwidth!"], ["created_at", "2014-08-11 11:22:24.854139"], ["responsable_id", 2], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.854139"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.1ms)[0m  rollback transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "You can't generate the circuit without programming the back-end FTP application!"], ["created_at", "2014-08-11 11:22:24.858509"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.858509"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Try to hack the XML bus, maybe it will back up the 1080p matrix!"], ["created_at", "2014-08-11 11:22:24.862249"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.862249"]]
-  [1m[35m (0.8ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "The AI transmitter is down, connect the wireless application so we can reboot the GB program!"], ["created_at", "2014-08-11 11:22:24.865972"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.865972"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Try to transmit the PCI microchip, maybe it will override the open-source alarm!"], ["created_at", "2014-08-11 11:22:24.869800"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.869800"]]
-  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "You can't navigate the matrix without connecting the cross-platform SMTP capacitor!"], ["created_at", "2014-08-11 13:29:45.775192"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.775192"]]
+  [1m[35m (1.7ms)[0m  commit transaction
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.0ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "We need to override the auxiliary HDD sensor!"], ["created_at", "2014-08-11 11:22:24.874032"], ["responsable_id", 3], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.874032"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The AI panel is down, generate the multi-byte hard drive so we can transmit the ADP transmitter!"], ["created_at", "2014-08-11 11:22:24.878232"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.878232"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Try to index the SDD pixel, maybe it will hack the multi-byte bus!"], ["created_at", "2014-08-11 11:22:24.881741"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.881741"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "We need to transmit the open-source GB bandwidth!"], ["created_at", "2014-08-11 13:29:45.780625"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.780625"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.1ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "We need to index the mobile HTTP monitor!"], ["created_at", "2014-08-11 11:22:24.885547"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.885547"]]
-  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The SSL bus is down, compress the solid state transmitter so we can parse the THX feed!"], ["created_at", "2014-08-11 13:29:45.785946"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.785946"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "The RSS application is down, connect the digital matrix so we can navigate the ADP bandwidth!"], ["created_at", "2014-08-11 13:29:45.823251"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.823251"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "We need to generate the back-end HTTP driver!"], ["created_at", "2014-08-11 13:29:45.829351"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.829351"]]
+  [1m[35m (1.7ms)[0m  commit transaction
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.1ms)[0m  rollback transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "I'll index the redundant RAM interface, that should monitor the HDD card!"], ["created_at", "2014-08-11 11:22:24.890008"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.890008"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "We need to quantify the multi-byte TCP bandwidth!"], ["created_at", "2014-08-11 11:22:24.893995"], ["responsable_id", 4], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.893995"]]
-  [1m[35m (0.8ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "transmitting the monitor won't do anything, we need to bypass the neural SDD pixel!"], ["created_at", "2014-08-11 11:22:24.897962"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.897962"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "We need to program the open-source USB matrix!"], ["created_at", "2014-08-11 11:22:24.901978"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.901978"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.1ms)[0m  rollback transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "transmitting the array won't do anything, we need to synthesize the cross-platform RAM panel!"], ["created_at", "2014-08-11 11:22:24.906176"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.906176"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "If we bypass the application, we can get to the TCP matrix through the multi-byte CSS system!"], ["created_at", "2014-08-11 11:22:24.910301"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.910301"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "calculating the pixel won't do anything, we need to bypass the redundant PCI pixel!"], ["created_at", "2014-08-11 11:22:24.914039"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.914039"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "If we reboot the circuit, we can get to the TCP capacitor through the mobile SDD transmitter!"], ["created_at", "2014-08-11 11:22:24.918045"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.918045"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Use the online SDD panel, then you can copy the cross-platform circuit!"], ["created_at", "2014-08-11 11:22:24.921717"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.921717"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.1ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "copying the monitor won't do anything, we need to synthesize the open-source GB alarm!"], ["created_at", "2014-08-11 11:22:24.926343"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.926343"]]
-  [1m[35m (0.8ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "I'll bypass the wireless HDD panel, that should panel the USB sensor!"], ["created_at", "2014-08-11 11:22:24.930168"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.930168"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Try to reboot the HDD capacitor, maybe it will program the primary alarm!"], ["created_at", "2014-08-11 11:22:24.933978"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.933978"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Use the optical TCP circuit, then you can compress the auxiliary firewall!"], ["created_at", "2014-08-11 11:22:24.937900"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.937900"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.1ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "I'll connect the virtual THX sensor, that should protocol the SMS bus!"], ["created_at", "2014-08-11 11:22:24.979141"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.979141"]]
-  [1m[35m (0.9ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Use the back-end SMTP transmitter, then you can calculate the neural port!"], ["created_at", "2014-08-11 11:22:24.983517"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.983517"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Use the virtual CSS program, then you can hack the neural microchip!"], ["created_at", "2014-08-11 11:22:24.987257"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.987257"]]
-  [1m[35m (0.8ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Try to reboot the PCI program, maybe it will generate the back-end protocol!"], ["created_at", "2014-08-11 11:22:24.991898"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.991898"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "I'll quantify the wireless AGP application, that should driver the GB monitor!"], ["created_at", "2014-08-11 11:22:24.996349"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.996349"]]
-  [1m[35m (0.6ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "If we back up the program, we can get to the SQL transmitter through the optical CSS capacitor!"], ["created_at", "2014-08-11 11:22:24.999955"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:24.999955"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "You can't reboot the card without copying the solid state SMTP bus!"], ["created_at", "2014-08-11 13:29:45.836803"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.836803"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.1ms)[0m  begin transaction
   [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Try to copy the COM port, maybe it will bypass the auxiliary circuit!"], ["created_at", "2014-08-11 11:22:25.004246"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.004246"]]
-  [1m[35m (0.9ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "You can't input the system without bypassing the cross-platform CSS interface!"], ["created_at", "2014-08-11 13:29:45.842163"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.842163"]]
+  [1m[35m (1.4ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "We need to calculate the 1080p RAM circuit!"], ["created_at", "2014-08-11 11:22:25.008502"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.008502"]]
-  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "The PCI port is down, hack the wireless matrix so we can compress the RAM sensor!"], ["created_at", "2014-08-11 13:29:45.847003"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.847003"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "We need to transmit the multi-byte RAM card!"], ["created_at", "2014-08-11 11:22:25.012914"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.012914"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "parsing the pixel won't do anything, we need to bypass the redundant HDD card!"], ["created_at", "2014-08-11 11:22:25.017081"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.017081"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "navigating the circuit won't do anything, we need to synthesize the auxiliary EXE microchip!"], ["created_at", "2014-08-11 11:22:25.020877"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.020877"]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "connecting the system won't do anything, we need to index the digital PNG capacitor!"], ["created_at", "2014-08-11 13:29:45.852583"], ["responsable_id", 5], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.852583"]]
+  [1m[35m (1.4ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.0ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "If we transmit the matrix, we can get to the PNG sensor through the multi-byte SDD alarm!"], ["created_at", "2014-08-11 11:22:25.024548"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.024548"]]
-  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Use the online COM matrix, then you can bypass the haptic capacitor!"], ["created_at", "2014-08-11 13:29:45.857643"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.857643"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.1ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The GB interface is down, quantify the open-source pixel so we can override the SSL hard drive!"], ["created_at", "2014-08-11 11:22:25.028925"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.028925"]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Use the auxiliary GB card, then you can back up the back-end system!"], ["created_at", "2014-08-11 13:29:45.862623"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.862623"]]
+  [1m[35m (1.6ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[35m (0.1ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "programming the firewall won't do anything, we need to transmit the 1080p HDD capacitor!"], ["created_at", "2014-08-11 11:22:25.032652"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.032652"]]
-  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
-  [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "I'll generate the redundant GB sensor, that should array the PCI array!"], ["created_at", "2014-08-11 11:22:25.036599"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.036599"]]
-  [1m[35m (0.7ms)[0m  commit transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.0ms)[0m  rollback transaction
-  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "backing up the transmitter won't do anything, we need to copy the online RAM array!"], ["created_at", "2014-08-11 11:22:25.040282"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.040282"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Use the solid state RSS protocol, then you can quantify the haptic matrix!"], ["created_at", "2014-08-11 13:29:45.867598"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.867598"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.1ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "connecting the system won't do anything, we need to connect the wireless AGP monitor!"], ["created_at", "2014-08-11 11:22:25.044497"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.044497"]]
-  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The TCP interface is down, transmit the open-source capacitor so we can back up the ADP feed!"], ["created_at", "2014-08-11 13:29:45.872643"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.872643"]]
+  [1m[35m (1.4ms)[0m  commit transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
   [1m[35m (0.0ms)[0m  rollback transaction
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "hacking the sensor won't do anything, we need to transmit the auxiliary PNG capacitor!"], ["created_at", "2014-08-11 11:22:25.048245"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.048245"]]
-  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "We need to bypass the 1080p THX panel!"], ["created_at", "2014-08-11 13:29:45.877684"], ["responsable_id", 6], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.877684"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "If we synthesize the bus, we can get to the SQL array through the online EXE protocol!"], ["created_at", "2014-08-11 13:29:45.882807"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.882807"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "I'll connect the back-end HDD microchip, that should bus the SSL capacitor!"], ["created_at", "2014-08-11 13:29:45.888370"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.888370"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "If we copy the hard drive, we can get to the HDD array through the primary CSS pixel!"], ["created_at", "2014-08-11 13:29:45.893583"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.893583"]]
+  [1m[35m (1.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "The AI card is down, compress the primary card so we can hack the ADP firewall!"], ["created_at", "2014-08-11 13:29:45.899188"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.899188"]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
   [1m[35m (0.0ms)[0m  begin transaction
-  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "connecting the circuit won't do anything, we need to index the digital FTP circuit!"], ["created_at", "2014-08-11 11:22:25.051956"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 11:22:25.051956"]]
-  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "You can't back up the bandwidth without generating the multi-byte THX panel!"], ["created_at", "2014-08-11 13:29:45.904515"], ["responsable_id", 7], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.904515"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "I'll copy the multi-byte AI pixel, that should circuit the SDD firewall!"], ["created_at", "2014-08-11 13:29:45.909503"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.909503"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The PCI array is down, synthesize the redundant interface so we can index the COM pixel!"], ["created_at", "2014-08-11 13:29:45.914498"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.914498"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Use the optical TCP system, then you can generate the multi-byte sensor!"], ["created_at", "2014-08-11 13:29:45.923079"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.923079"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "We need to navigate the digital PNG interface!"], ["created_at", "2014-08-11 13:29:45.931420"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.931420"]]
+  [1m[35m (1.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "I'll copy the multi-byte FTP firewall, that should sensor the SDD application!"], ["created_at", "2014-08-11 13:29:45.940036"], ["responsable_id", 8], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.940036"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "If we program the capacitor, we can get to the TCP card through the 1080p RSS array!"], ["created_at", "2014-08-11 13:29:45.946663"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.946663"]]
+  [1m[35m (1.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "You can't synthesize the driver without indexing the cross-platform SMS driver!"], ["created_at", "2014-08-11 13:29:45.952849"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.952849"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Try to synthesize the THX alarm, maybe it will synthesize the mobile program!"], ["created_at", "2014-08-11 13:29:45.958400"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.958400"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "We need to calculate the bluetooth HDD feed!"], ["created_at", "2014-08-11 13:29:45.964354"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.964354"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The HDD microchip is down, synthesize the open-source system so we can compress the SMS card!"], ["created_at", "2014-08-11 13:29:45.969718"], ["responsable_id", 9], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:45.969718"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Try to parse the RSS protocol, maybe it will hack the primary interface!"], ["created_at", "2014-08-11 13:29:46.022563"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:46.022563"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "We need to navigate the primary THX interface!"], ["created_at", "2014-08-11 13:29:46.028149"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:46.028149"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "If we hack the system, we can get to the AI capacitor through the bluetooth TCP circuit!"], ["created_at", "2014-08-11 13:29:46.033165"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:46.033165"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "The RSS application is down, quantify the digital bandwidth so we can input the GB transmitter!"], ["created_at", "2014-08-11 13:29:46.038894"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:46.038894"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "responses" ("body", "created_at", "responsable_id", "responsable_type", "updated_at") VALUES (?, ?, ?, ?, ?)  [["body", "Use the virtual RSS transmitter, then you can copy the primary transmitter!"], ["created_at", "2014-08-11 13:29:46.043969"], ["responsable_id", 10], ["responsable_type", "Answer"], ["updated_at", "2014-08-11 13:29:46.043969"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
