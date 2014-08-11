@@ -8,7 +8,7 @@
 		<div class="add-response">
 		 <%= form_for [@answer, Response.new], :remote => true do |f| %>
 		   <p>
-		     <%= f.label :body, "New response" %><br/>
+		     <%= f.label :body, "Comment on the question" %><br/>
 		     <%= f.text_area :body %>
 		   </p>
 		   <div id="add-response-button"><p><%= f.submit "Add response" %></p></div>
