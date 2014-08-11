@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+		<h4>Comments</h4>
+		<div id="responses">
+		  <%= render :partial => @answer.responses %>
+		</div>
+
+		<div class="add-response">
+		 <%= form_for [@answer, Response.new], :remote => true do |f| %>
+		   <p>
+		     <%= f.label :body, "Comment on the question" %><br/>
+		     <%= f.text_area :body %>
+		   </p>
+		   <div id="add-response-button"><p><%= f.submit "Add response" %></p></div>
+		 <% end %>
+		</div>
+	</div>
+</div>
